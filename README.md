@@ -1,7 +1,20 @@
-# local-ai-lab
+# Local AI Secretary (POC, MVP, and Prod)
+
+## Tech Stach (Initial)
+- Docker
+- Docker Desktop (Dev)
+- Kubernetes (Prod)
+- Ollama (LLM Platform)
+- Qwen3 LLM
+- Supabase (DBaaS)
+- n8n (Dev) (Low-Code workflow platform with predefined integrations)
+- Open WebUI 
 
 ## Purpose
-Build a local AI secretary that automates knowledge work across work tools to assisnt in creating a Personal Knowledge Base and to auto-generate summaries, reports, and replies to prompts. 
+Build a local AI secretary that 
+- automates knowledge work across work tools to assist in creating a Personal Knowledge Base.
+- to auto-generate summaries, reports, and data/replies to prompts (utilizing internal data sources).
+- Streamline team, project, and product management with intellignet insight and rapid data queries.
 
 
 ## High Level Topology
@@ -115,4 +128,15 @@ graph TD
     style CORE fill:#8b5cf6,stroke:#fff,color:#fff
 ```
 
+## Agent Topology (Email Analysis)
+
+```mermaid
+graph TD
+    SUP[Core Secretary<br/>Supervisor] --> EA[Email Analyst Agent<br/>Qwen3:14b]
+    EA --> TOOL_GRAPH[Microsoft Graph Tool<br/>Fetch Emails by Criteria]
+    TOOL_GRAPH --> EA
+    EA --> TOOL_RAG[Vector RAG Tool<br/>Past Email Summaries]
+    EA --> SUP
+    SUP --> TOOL_OBS[Obsidian Write Tool]
+```
 
