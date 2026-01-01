@@ -6,7 +6,7 @@ graph TD
     subgraph Local Machine / Docker Host
         OLLAMA[Ollama<br/>Qwen3:8b/14b/30b Models<br/>OpenAI-compatible API]
         WEBUI[Open WebUI<br/>Manual Chat & Agent Testing]
-        SUPABASE[Supabase<br/>Vector DB for RAG<br/>(Obsidian notes, past summaries)]
+        SUPABASE[Supabase<br/>Vector DB for RAG<br/>Obsidian notes, past summaries]
         AGENT[LangGraph / LangChain Agents<br/>Core Secretary Agent<br/>+ Specialized Sub-Agents]
         SCHEDULER[Scheduler<br/>Cron / Python Scripts<br/>Daily/Weekly Triggers]
     end
