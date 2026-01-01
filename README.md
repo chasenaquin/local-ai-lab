@@ -1,5 +1,7 @@
 # local-ai-lab
 
+```mermaid
+
 graph TD
     subgraph Local Machine / Docker Host
         OLLAMA[Ollama<br/>Qwen3:8b/14b/30b Models<br/>OpenAI-compatible API]
@@ -56,3 +58,4 @@ graph TD
     class TOOL_OUTLOOK,TOOL_TEAMS,TOOL_JIRA,TOOL_OBSIDIAN,TOOL_FS,TOOL_VECTOR tool;
     class MS_GRAPH,JIRA,GITHUB external;
     class SUPABASE,LOCAL_FS,OBSIDIAN_APP storage;
+```
