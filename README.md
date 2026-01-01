@@ -1,34 +1,35 @@
 # local-ai-lab
 
-# Final(ish) Version 1.0
+## Purpose
+Build a local AI secretary that automates knowledge work across work tools to assisnt in creating a Personal Knowledge Base and to auto-generate summaries, reports, and replies to prompts. 
+
 
 ## High Level Topology
 
-```
-[Local Machine/Docker Host (Still determining between one or multiple hosts.]
-├── Ollama (Qwen3 models: 8b/14b/30b-MoE) (Possibly smaller models for sumarization if needed)
-│   └── OpenAI-compatible API endpoint (http://localhost:11434)
-├── Open WebUI → Chat interface to query llm, open web, and agents manually
-├── Supabase → Vector DB for RAG (embeddings from notes/emails)
-├── LangGraph/LangChain Agents (Python app/container) 
-│   ├── Core Agent: "Secretary" (reasoning + tool router)
-│   ├── Specialized Sub-Agents (CrewAI-style roles):
-│   │   - Email Analyst (Outlook)
-│   │   - Chat Summarizer (Teams)
-│   │   - Task Manager (Jira)
-│   │   - Knowledge Curator (Obsidian/GitHub/Filesystem) (other tools later like sharepoint & interal tooling)
-│   └── Tools:
-│       - Microsoft Graph API (emails/calendars/Teams channels)
-│       - Jira REST API (issues/search)
-│       - GitPython (commit/push to Obsidian repo)
-│       - Filesystem read/write
-│       - Vector search (Supabase)
-├── Scheduler (cron/Python scripts)
-│   ├── Daily/weekly runs: Fetch → Analyze → Summarize → Write to Obsidian
-│   └── Triggers: Webhooks (if possible) or polling
-└── Output: Obsidian Vault (synced to GitHub via Obsidian-Git plugin) & quite obviously Open Web UI.
-```
-
+Local Infrastructure (1 Host or multiple for resource optimization)
+- Ollama (LLM runner)
+    - Qwen3 models: 8b/14b/30b-MoE (depending on agent needs & UI needs)
+    - OpenAI-compatible API endpoint (localhost:11434)
+ - Open WebUI: Web UI & Chat interface to query LLM directly adn agents directly/manually
+ - Supabase: Vector DB for RAG (embeddings from notes/email)
+ - LangGraph/LangChain Agents (Python app/container) (Deviating from n8n for limitaitons)
+    - Core Agent "Secretary": Reasoning and tool router
+    - Specialized sub-agents (crewAI-style roles):
+        - Email Analyst (Outlook)
+        - Chat Summarizer (MS Teams)
+        - Taks Manager (Jira)
+        - Knowledge Curator (Obsidian, Github, Filesystem)
+    - Tools
+        - MS Graph API (Email, Calendar, Teams)
+        - Jira REST API (issues/search/jql)
+        - GitPython (commit/push  to github, specifically Obsidian repo)
+        - Filesytem read/write
+        - Vector search (supabase)
+    - Scheduler (Cron / Python scripts)
+       - Daily/Weekly runs: Fetch, Analyze, Summarize, and then write to obsidian report.
+       - Triggers (if needed)
+- Output: Obsidian Vault (Github Repo via Obsidian-Git plugin) or Open WebUI interface
+      
 
 ```mermaid
 
