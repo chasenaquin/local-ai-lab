@@ -1,5 +1,35 @@
 # local-ai-lab
 
+# Final(ish) Version 1.0
+
+## High Level Topology
+
+```
+[Local Machine/Docker Host (Still determining between one or multiple hosts.]
+├── Ollama (Qwen3 models: 8b/14b/30b-MoE) (Possibly smaller models for sumarization if needed)
+│   └── OpenAI-compatible API endpoint (http://localhost:11434)
+├── Open WebUI → Chat interface to query llm, open web, and agents manually
+├── Supabase → Vector DB for RAG (embeddings from notes/emails)
+├── LangGraph/LangChain Agents (Python app/container) 
+│   ├── Core Agent: "Secretary" (reasoning + tool router)
+│   ├── Specialized Sub-Agents (CrewAI-style roles):
+│   │   - Email Analyst (Outlook)
+│   │   - Chat Summarizer (Teams)
+│   │   - Task Manager (Jira)
+│   │   - Knowledge Curator (Obsidian/GitHub/Filesystem) (other tools later like sharepoint & interal tooling)
+│   └── Tools:
+│       - Microsoft Graph API (emails/calendars/Teams channels)
+│       - Jira REST API (issues/search)
+│       - GitPython (commit/push to Obsidian repo)
+│       - Filesystem read/write
+│       - Vector search (Supabase)
+├── Scheduler (cron/Python scripts)
+│   ├── Daily/weekly runs: Fetch → Analyze → Summarize → Write to Obsidian
+│   └── Triggers: Webhooks (if possible) or polling
+└── Output: Obsidian Vault (synced to GitHub via Obsidian-Git plugin) & quite obviously Open Web UI.
+```
+
+
 ```mermaid
 
 graph TD
@@ -59,3 +89,29 @@ graph TD
     class MS_GRAPH,JIRA,GITHUB external;
     class SUPABASE,LOCAL_FS,OBSIDIAN_APP storage;
 ```
+
+## Core Secretary Agent
+```mermaid
+graph TD
+    TRIGGERS[Triggers<br/>Scheduler Cron<br/>Open WebUI Manual Query<br/>Future: Voice/Webhooks] --> CORE[Core Secretary Agent<br/>Supervisor - Qwen3:14b<br/>Planning & Orchestration]
+
+    CORE --> EA[Email Analyst Agent]
+    CORE --> CS[Chat Summarizer Agent]
+    CORE --> TM[Task Manager Agent]
+    CORE --> KC[Knowledge Curator Agent]
+
+    EA --> CORE
+    CS --> CORE
+    TM --> CORE
+    KC --> CORE
+
+    CORE -->|Final Approval & Synthesis| KC
+    KC --> OUTPUT[Output<br/>Obsidian Markdown<br/>Git Commit & Push]
+
+    CORE --> TOOL_RAG[Vector RAG Tool<br/>Personal Knowledge Context]
+    TOOL_RAG --> CORE
+
+    style CORE fill:#8b5cf6,stroke:#fff,color:#fff
+```
+
+
