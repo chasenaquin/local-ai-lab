@@ -11,9 +11,9 @@
 
 
 ## Possibility Assessment & Proof-of-Concept
-
-*Initial core concept learning, capability assessment, knowledge gap identification, requirements gathering, resource testing, techh analysis, and POC build.**
 ---
+*Initial core concept learning, capability assessment, knowledge gap identification, requirements gathering, resource testing, techh analysis, and POC build.**
+
 
 ### [POC] Technology Stack
 - Docker ()
