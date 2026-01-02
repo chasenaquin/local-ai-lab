@@ -1,20 +1,68 @@
-# Local AI Secretary (POC, MVP, and Prod)
+# Local AI Secretary
 
-## Tech Stach (Initial)
-- Docker
-- Docker Desktop (Dev)
-- Kubernetes (Prod)
+**Purpose**:
+- Provide an LLM & interface to quickly and intelligently query local and remote data (open web, local sensitive data, and internal work data)
+- Automate knowledge work and information gathering to construct and query a Personal Knowledge Base (focused primarily on Career/Work domains)
+- Generate (daily, weekly, monthly, quarterly, and annual) sumamrizations, analysis, action identification, and reports of email, chat, and Jira work.
+- Provide an interface into Obisidan to intelligently interact with the content.
+- Provide an in interface into
+- Interface with internal work tools/APIs/Websites and codesbases to easily and intellignetly provide inforamation, explainations, and insight.
+- Assist with streamlining team/product/project management and documentation 
+
+
+## Possibility Assessment & Proof-of-Concept
+*Initial core concept learning, capability assessment, knowledge gap identification, requirements gathering, resource testing, techh analysis, and POC build.**
+---
+
+### [POC] Technology Stack
+- Docker ()
+- Docker Compose () *Will most likely not use in produciton. Will transition to Kubernetes accross multiple devices*
+- Docker Desktop () *Will most likely not use in production*
 - Ollama (LLM Platform)
-- Qwen3 LLM
-- Supabase (DBaaS)
-- n8n (Dev) (Low-Code workflow platform with predefined integrations)
-- Open WebUI 
+- Qwen0.6b (Testing Model. Severely too limited for prod use in any capacity)
+- Open webUI (User Interface)
+- SearXNG (Internet Metasearch Engine)
+- N8N (Low-Code general purpose automation & agent/workflow testing with prebuilt integrations) *Will be replaced by LangGraph LangChain most likely*
+- Flowist (AI workflows & agents)
+- Supabase (Baas Postgress DB, auth, feil storage, edge, ai/vector) *May be outside of the POC scope due to resource needs*
+- Qdrant (Vector database & similarity search engine)
+- Neo4j (Graph DB)
+- Langfuse (Observability for LLM applications)
 
-## Purpose
-Build a local AI secretary that 
-- automates knowledge work across work tools to assist in creating a Personal Knowledge Base.
-- to auto-generate summaries, reports, and data/replies to prompts (utilizing internal data sources).
-- Streamline team, project, and product management with intellignet insight and rapid data queries.
+### [POC] Agents/Workflows
+- Internet Search
+- Notes Summarization (Requires Filesystem access or Repo Access)
+- Email Summarization (Multiple based on time/date provided)
+- MS Teams Summarization (Multiple Channels & Chats)
+
+
+
+
+## MVP
+---
+
+### [MVP] Technology Stack
+- Docker ()
+- Kubernetes
+- Ollama (LLM Platform)
+- Qwen 14b
+- Open webUI (User Interface)
+- SearXNG (Internet Metasearch Engine)
+- N8N *If still applicable after LangGraph/LangChain*
+- LangGraph
+- LangChain
+- Flowist (AI workflows & agents) *If still applicable after LangGraph/LangChain*
+- Supabase (Baas Postgress DB, auth, feil storage, edge, ai/vector) *May be outside of the POC scope due to resource needs*
+- Qdrant (Vector database & similarity search engine)
+- Neo4j (Graph DB)
+- Langfuse (Observability for LLM applications)
+
+
+
+
+
+
+
 
 
 ## High Level Topology
